@@ -136,7 +136,7 @@ import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 
 batch_size = 64
-epochs = 10
+epochs = 20
 channels = 3
 learning_rate = 1e-3
 
@@ -160,9 +160,9 @@ for epoch in range(epochs):
 		optimizer.zero_grad()
 		loss.backward()
 		optimizer.step()
-		if i % 32 == 0:
+		if i % 64 == 0:
 			print("Iteration: %d, Loss: %f" % (i,
 					loss.cpu().detach().numpy()))
 			output = toImage(reconstruction.cpu()[0]).convert('RGB')
 			output.save('./cifar10_output/%d%d.bmp' % (epoch, i))
-	learning_rate *= 0.9
+	learning_rate *= 0.98
